@@ -10,13 +10,17 @@ mv ips-v6.tmp ips-v6
 #for cfip in `cat ips-v4`; do ufw allow from $cfip; done
 #for cfip in `cat ips-v6`; do ufw allow from $cfip; done
 
-# Allow to port 80
+# Allow to port 80 http
 for cfip in `cat ips-v4`; do ufw allow from $cfip to any port 80 proto tcp; done
 for cfip in `cat ips-v6`; do ufw allow from $cfip to any port 80 proto tcp; done
 
-# Allow to port 443
+# Allow to port 443 https
 for cfip in `cat ips-v4`; do ufw allow from $cfip to any port 443 proto tcp; done
 for cfip in `cat ips-v6`; do ufw allow from $cfip to any port 443 proto tcp; done
+
+# Allow to port 2408 Railgun
+for cfip in `cat ips-v4`; do ufw allow from $cfip to any port 2408 proto tcp; done
+for cfip in `cat ips-v6`; do ufw allow from $cfip to any port 2408 proto tcp; done
 
 ufw reload > /dev/null
 
