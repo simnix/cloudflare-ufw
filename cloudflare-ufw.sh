@@ -7,8 +7,16 @@ wget https://www.cloudflare.com/ips-v6 -O ips-v6.tmp
 mv ips-v4.tmp ips-v4
 mv ips-v6.tmp ips-v6
 
-for cfip in `cat ips-v4`; do ufw allow from $cfip; done
-for cfip in `cat ips-v6`; do ufw allow from $cfip; done
+#for cfip in `cat ips-v4`; do ufw allow from $cfip; done
+#for cfip in `cat ips-v6`; do ufw allow from $cfip; done
+
+# Allow to port 80
+for cfip in `cat ips-v4`; do ufw allow from $cfip to any port 80 proto tcp; done
+for cfip in `cat ips-v6`; do ufw allow from $cfip to any port 80 proto tcp; done
+
+# Allow to port 443
+for cfip in `cat ips-v4`; do ufw allow from $cfip to any port 443 proto tcp; done
+for cfip in `cat ips-v6`; do ufw allow from $cfip to any port 443 proto tcp; done
 
 ufw reload > /dev/null
 

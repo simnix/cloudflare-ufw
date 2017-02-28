@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/local/src/cloudflare-ufw/cloudflare-ufw.sh >> /var/log/ufw-cloudflare.log
